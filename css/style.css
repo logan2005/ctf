@@ -1527,17 +1527,17 @@ body {
     transform: rotate(90deg);
 }
 
-/* Quick Reference Panel */
+/* Quick Reference Panel - Right Side */
 .quick-reference-panel {
     position: fixed;
-    left: 0;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     background: var(--color-surface);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 255, 65, 0.1);
-    border-left: none;
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    border-right: none;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
     box-shadow: var(--shadow-lg);
     z-index: 1000;
     transition: all var(--transition-base);
@@ -1545,23 +1545,23 @@ body {
 }
 
 .quick-reference-panel.collapsed {
-    transform: translateY(-50%) translateX(-100%);
+    transform: translateY(-50%) translateX(100%);
 }
 
 .quick-reference-panel.collapsed .quick-ref-toggle {
-    transform: translateX(100%);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    transform: translateX(-100%);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .quick-ref-toggle {
     position: absolute;
-    right: -40px;
+    left: -40px;
     top: 50%;
     transform: translateY(-50%);
     background: var(--color-surface);
     border: 1px solid rgba(0, 255, 65, 0.1);
-    border-left: none;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border-right: none;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
     padding: var(--spacing-md) var(--spacing-sm);
     cursor: pointer;
     writing-mode: vertical-rl;
