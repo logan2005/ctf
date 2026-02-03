@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberQuest CTF - Interactive Cybersecurity Challenges</title>
+    <meta name="description"
+        content="Master cybersecurity through interactive CTF challenges with AI-powered guidance. Learn hacking, penetration testing, and security fundamentals.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">
+                    <span class="glitch" data-text="CYBERQUEST">CYBERQUEST</span>
+                    <span class="subtitle">CTF Platform</span>
+                </h1>
+            </div>
+            <div class="header-center">
+                <div class="level-indicator" id="levelIndicator">
+                    <span class="level-label">Level</span>
+                    <span class="level-number" id="currentLevelDisplay">1</span>
+                    <span class="level-total">/ 5</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="score-display" id="scoreDisplay">
+                    <span class="score-label">Score</span>
+                    <span class="score-value" id="scoreValue">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Challenge Area (Left Side - 70%) -->
+            <main class="challenge-area">
+                <!-- Progress Tracker -->
+                <div class="progress-tracker" id="progressTracker">
+                    <div class="progress-item" data-level="1">
+                        <div class="progress-dot"></div>
+                        <span class="progress-label">Linux Basics</span>
+                    </div>
+                    <div class="progress-item" data-level="2">
+                        <div class="progress-dot"></div>
+                        <span class="progress-label">Network Recon</span>
+                    </div>
+                    <div class="progress-item" data-level="3">
+                        <div class="progress-dot"></div>
+                        <span class="progress-label">Cryptography</span>
+                    </div>
+                    <div class="progress-item" data-level="4">
+                        <div class="progress-dot"></div>
+                        <span class="progress-label">Web Exploit</span>
+                    </div>
+                    <div class="progress-item" data-level="5">
+                        <div class="progress-dot"></div>
+                        <span class="progress-label">Priv Escalation</span>
+                    </div>
+                    <button class="collapse-btn" id="collapseProgress" title="Collapse Progress Tracker">−</button>
+                </div>
+
+                <!-- Challenge Description -->
+                <div class="challenge-description" id="challengeDescription">
+                    <div class="challenge-header">
+                        <h2 class="challenge-title" id="challengeTitle">Loading Challenge...</h2>
+                        <button class="collapse-btn" id="collapseChallenge"
+                            title="Collapse Challenge Description">−</button>
+                    </div>
+                    <div class="challenge-content" id="challengeContent">
+                        <p class="challenge-text" id="challengeText">Initializing system...</p>
+                        <div class="challenge-objectives" id="challengeObjectives"></div>
+                    </div>
+                </div>
+
+                <!-- Terminal Simulation -->
+                <div class="terminal-container" id="terminalContainer">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-button close"></span>
+                            <span class="terminal-button minimize"></span>
+                            <span class="terminal-button maximize"></span>
+                        </div>
+                        <div class="terminal-title">root@cyberquest:~#</div>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <div class="terminal-output" id="terminalOutput"></div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt" id="terminalPrompt">root@cyberquest:~$</span>
+                            <input type="text" class="terminal-input" id="terminalInput" autocomplete="off"
+                                spellcheck="false" autofocus>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flag Submission Area -->
+                <div class="flag-submission" id="flagSubmission">
+                    <label for="flagInput" class="flag-label">
+                        <span class="flag-icon">🚩</span>
+                        Submit Flag
+                    </label>
+                    <div class="flag-input-group">
+                        <input type="text" id="flagInput" class="flag-input" placeholder="CTF{...}" autocomplete="off">
+                        <button id="submitFlagBtn" class="submit-flag-btn">
+                            <span>Submit</span>
+                        </button>
+                    </div>
+                    <div class="flag-feedback" id="flagFeedback"></div>
+                </div>
+            </main>
+
+            <!-- Chatbot Assistant (Right Side - 30%) -->
+            <aside class="chatbot-sidebar">
+                <div class="chatbot-header">
+                    <div class="chatbot-avatar">🤖</div>
+                    <div class="chatbot-info">
+                        <h3 class="chatbot-name">AI Assistant</h3>
+                        <p class="chatbot-status">
+                            <span class="status-dot"></span>
+                            Online
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chatbot-messages" id="chatbotMessages">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+
+                <div class="chatbot-input-area">
+                    <div class="quick-actions" id="quickActions">
+                        <button class="quick-action-btn" data-action="help">Help</button>
+                        <button class="quick-action-btn" data-action="hint">Hint</button>
+                        <button class="quick-action-btn" data-action="objective">Objective</button>
+                    </div>
+                    <div class="chatbot-input-group">
+                        <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Ask for help..."
+                            autocomplete="off">
+                        <button id="sendChatBtn" class="send-chat-btn">
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal" id="victoryModal">
+        <div class="modal-content victory-content">
+            <div class="victory-icon">🏆</div>
+            <h2 class="victory-title">Congratulations!</h2>
+            <p class="victory-message" id="victoryMessage">You've completed the challenge!</p>
+            <div class="victory-stats" id="victoryStats"></div>
+            <button id="nextLevelBtn" class="next-level-btn">Next Level →</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/education.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/challenges.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
